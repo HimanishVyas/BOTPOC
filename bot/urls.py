@@ -4,5 +4,5 @@ from django.urls import path
 from bot import views
 
 urlpatterns = [
-    path('home', views.home.as_view(), name='home')
+    path('send', views.SendMessage.as_view(), name='home')
 ]
