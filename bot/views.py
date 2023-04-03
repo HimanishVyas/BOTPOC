@@ -1,12 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-import pywhatkit
 import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from bot.models import mssg
 from rest_framework.decorators import authentication_classes
-import datetime
+import os
+import dotenv
+dotenv.read_dotenv()
 # Create your views here.
 
 class SendMessage(APIView):
@@ -15,9 +13,8 @@ class SendMessage(APIView):
     
 
     def post(self,request):
-        lis = ["919724946042","917698544197", "919409212945"]
-        
-       
+        data = request.data 
+        lis = data['number']       
         for i in lis:
                 jsondata = {
             "messaging_product": "whatsapp",
@@ -32,12 +29,12 @@ class SendMessage(APIView):
         }   
                 headers = {
         
-                    "Authorization":"Bearer EAAQhSS35gHsBALxDFuhQlLaetDrzkVLwGy5oBHHmM7ToLBKQvwRZA8KWbz4r8HrakVwmWbnChFo25dbXXZAk5R6wOiRDY1fH2dByloKZArTx5OkoaInsu91lIQ3DzXxB3axeQLXX5F7CBla9nnZBzZAlIjQqMZCEyyvMPzmHhjLhG1iCx9dEXhOyFNU7qfOmhUvrrSqNryeAZDZD"
+                    "Authorization":"Bearer EAAQhSS35gHsBAEgL054iYThXO8Q4cLixvIVTc9AwiXhKFFGBc2YZCvpu6yT7dkSt7GrDJoKj6aFhH793YkMXZBh5N6HHdcYsItPkLdT9hQx5VVdmyoT5coS1HF5yfL4rVjm1bd9g8d1ZBr54e7DTMFKLt325ZCPWBIBbGXBm4QQZCJBtn35hrZAK38TOC31ZBSzCytWiHWyDwZDZD"
                     ,
                     "Content-Type":"Application/json" 
         }
                 
-                x = requests.post( "https://graph.facebook.com/v16.0/110807025306438/messages", json = jsondata,headers=headers)
+                x = requests.post( os.getenv("FACEBOOK_API"), json = jsondata,headers=headers)
         return Response(x.json())
 
 
