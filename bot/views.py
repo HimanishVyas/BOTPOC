@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import authentication_classes
 import os
 import dotenv
-dotenv.read_dotenv()
+dotenv.load_dotenv()
 # Create your views here.
 
 class SendMessage(APIView):
