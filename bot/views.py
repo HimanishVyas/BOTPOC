@@ -29,10 +29,9 @@ class SendMessage(APIView):
         }   
                 headers = {
         
-                    "Authorization":"Bearer EAAQhSS35gHsBAEdXUTbSiGIoB8JNmPJ3WKfMsH8eJTnlT07UAqA3gxz8ZB2nlriz6XDBCm0fqmqeo1csaCxxJ6XfaZCPtnQZCwmf2XNIQNElXxZCmZBxkGJUDx9qZCv9OQL8w8eDdkELXoiohSnrI5U3nK46oG1GOZAM2SoxcZBiKoeadzcG6DFCGdIeBuHpQzEMoEEeqUzQWgZDZD"
-                    ,
+                    "Authorization":os.getenv("Token"),
                     "Content-Type":"Application/json" 
-        }
+                }
                 
                 x = requests.post( os.getenv("FACEBOOK_API"), json = jsondata,headers=headers)
         return Response(x.json())
